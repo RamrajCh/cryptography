@@ -5,13 +5,12 @@ from exchange_rsa_keys import key_exchange_client
 
 def client(privkey):
     host = socket.gethostname()
-    port = 9990
+    port = 9997
 
-    server_pubkey = key_exchange_client(
-        client_privkey_file="client_keys/privkey.pem", 
+    server_pubkey = key_exchange_client( 
         client_pubkey_file="client_keys/pubkey.pem",
         server_host=host, 
-        server_port=16452
+        server_port=9090
     )
     
     client_socket = socket.socket()

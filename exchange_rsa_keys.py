@@ -1,7 +1,7 @@
 import rsa
 import socket
 
-def key_exchange_client(client_privkey_file, client_pubkey_file, server_host, server_port):
+def key_exchange_client(client_pubkey_file, server_host, server_port):
     """
     Send client's public key to server and receive public key of server.
 
@@ -15,9 +15,6 @@ def key_exchange_client(client_privkey_file, client_pubkey_file, server_host, se
     """
     with open(client_pubkey_file, 'rb') as f:
         client_pubkey = f.read()
-    
-    with open(client_privkey_file, 'rb') as f:
-        client_privkey = rsa.PrivateKey.load_pkcs1(f.read())
 
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.connect((server_host, server_port))
