@@ -28,6 +28,8 @@ def key_exchange_client(client_pubkey_file, server_host, server_port):
         server_pubkey = rsa.PublicKey.load_pkcs1(s.recv(2048))
         print("Server public key received.")
         
+        s.close()
+        
         return server_pubkey
 
 def key_exchange_server(server_pubkey_file, server_port):
@@ -60,5 +62,7 @@ def key_exchange_server(server_pubkey_file, server_port):
             # Send the encrypted public key to the client
             conn.send(server_pubkey)
             print("Server public key sent.")
+            
+            conn.close()
             
             return client_pubkey
